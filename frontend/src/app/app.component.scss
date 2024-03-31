@@ -1,0 +1,236 @@
+// https://material.angular.io/ for styling
+
+.whole-app {
+  background: #5ec3da;
+  //height: 100%;
+  display: grid;
+  grid-template-areas:
+    "navigation "
+    "page"
+    "footer";
+  grid-template-rows: min-content 1fr 100px;
+  padding: 0 10em;
+  height: 100%;
+
+  .page {
+    grid-area: page;
+    margin-left: calc(120px + 2em);
+  }
+
+  .navigation-section {
+    grid-area: navigation;
+    grid-template-areas: "logo navigationItems";
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    grid-gap: 2em;
+    padding: 2em 0;
+
+    .logo {
+      grid-area: logo;
+
+      img {
+        height: 110px;
+      }
+    }
+
+    .navigation-items {
+      grid-area: navigationItems;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      display: grid;
+
+      .navigation-item {
+        background: black;
+        border-radius: 0;
+
+        mat-icon {
+          margin-right: 10px;
+
+        }
+
+        &:disabled {
+          color: grey;
+        }
+
+
+      }
+    }
+  }
+
+  .validation-page {
+    display: grid;
+    grid-template-rows: min-content min-content 1fr;
+    grid-row-gap: 2em;
+
+    .validation-options {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-column-gap: 1em;
+      display: grid;
+
+      .validation-checkbox {
+        background-color: #0357a5;
+        color: white;
+        height: 2em;
+        padding: 1em;
+        border-radius: 1em;
+      }
+
+    }
+
+    .validation-text-input-section {
+      .validation-input {}
+
+      .validation-submit-button {}
+    }
+
+    .validation-results-section {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-column-gap: 2em;
+
+      .validation-result-section {
+        background: white;
+        padding: 1em 2em;
+        border-radius: 1em;
+
+        .validation-result-title {}
+
+        .validation-result {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minMax(100px, max-content));
+          grid-column-gap: 1em;
+
+          .validation-result-word-item {
+            background: #0357a5;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            border-radius: 1em;
+            height: 35px;
+            color: white;
+          }
+        }
+      }
+    }
+
+    .validation-raw-text-section {
+      background: white;
+      padding: 1em 2em;
+      border-radius: 1em;
+
+      .validation-raw-text-title {}
+
+      .validation-raw-text {}
+    }
+  }
+
+  .config-page {
+    .blacklist-section-title {}
+
+    .blacklist-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 2em;
+
+      .add-word-section {
+        background: white;
+        min-height: 50px;
+      }
+
+
+
+      .added-words-locally {
+        background: white;
+        min-height: 50px;
+        display: grid;
+
+        grid-template-columns: repeat(auto-fill, minMax(100px, max-content));
+        grid-column-gap: 1em;
+        grid-row-gap: .5em;
+        padding: 0.8em;
+        border-radius: 1em;
+
+
+      }
+
+      .added-words-cloud {
+        max-height: 200px;
+        overflow: auto;
+        background: white;
+        min-height: 50px;
+        background: white;
+        min-height: 50px;
+        display: grid;
+
+        grid-template-columns: repeat(auto-fill, minMax(100px, max-content));
+        grid-column-gap: 1em;
+        grid-row-gap: .5em;
+        padding: 0.8em;
+        border-radius: 1em;
+
+      }
+    }
+
+
+
+    .word-item {
+      background: #0357a5;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      border-radius: 1em;
+      height: 35px;
+      color: white;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+    }
+
+    .line {
+      border: 1px solid #408696;
+      margin: 1em 0;
+    }
+
+    .whitelist-section-title {}
+
+    .add-url-input {
+      min-width: 20em;
+    }
+
+    .whitelist-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 2em;
+
+      .add-url-section {
+
+        background: white;
+        min-height: 50px;
+        background: white;
+        min-height: 50px;
+        display: grid;
+
+        //grid-template-columns: repeat(auto-fill, minMax(100px, max-content));
+        grid-column-gap: 1em;
+        grid-row-gap: .5em;
+        padding: 0.8em;
+        border-radius: 1em;
+
+      }
+
+      .added-urls-locally {
+        background: white;
+        min-height: 50px;
+        display: grid;
+
+        grid-template-columns: repeat(auto-fill, minMax(100px, max-content));
+        grid-column-gap: 1em;
+        grid-row-gap: .5em;
+        padding: 0.8em;
+        border-radius: 1em;
+
+      }
+    }
+
+  }
+}

@@ -1,0 +1,5 @@
+{"sentence": ["Hello", "my", "name", "is", "Tej"], "censor": 0.85}
+{"sentence": ["Hello", "my", "name", "is", "Arnav"], "censor": 0}
+{"sentence": ["Hello", "how", "are", "you", "doing"], "censor": 0.45}
+{"sentence": ["Hello", "my", "name", "is", "Tej"], "censor": 0.2}
+{"sentence": ["What", "is", "your", "problem", "?"], "censor": 1}

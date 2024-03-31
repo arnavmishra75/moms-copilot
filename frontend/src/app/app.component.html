@@ -1,0 +1,139 @@
+<!-- https://material.angular.io/ -->
+<!-- https://material.io/resources/icons/?style=baseline -->
+<div class="whole-app">
+  <div class="navigation-section">
+    <div class="logo">
+      <img src="/assets/moms_copilot_logo_size_big.png" alt="image">
+    </div>
+    <div class="navigation-items">
+      <button (click)="onPageSelected(item)" mat-flat-button color="primary" class="navigation-item"
+        [disabled]="item.disabled" *ngFor="let item of navigationItems">
+        <mat-icon>{{item.icon}}</mat-icon>
+        <span>{{item.value | titlecase }}</span>
+      </button>
+    </div>
+  </div>
+  <div class="validation-page page" *ngIf="isValidationPage">
+
+    <mat-radio-group class="validation-options" name="validationTypeList" [(ngModel)]="selectedValidationType">
+      <mat-radio-button class="validation-checkbox" name="validationTypeList" *ngFor="let item of validationTypes"
+        [value]="item.value" [disabled]="item.disabled" [checked]="selectedValidationType===item.value"
+        (click)="validationTypeChanged(item)">
+        {{item.label}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <div class="validation-text-input-section">
+      <mat-form-field>
+        <mat-label>Insert the url or text here</mat-label>
+        <input matInput class="validation-input" type="text" placeholder="Insert the url or text here"
+          #validationTextElement>
+      </mat-form-field>
+      <!-- in this case when we click the button we pass the validationTextElement to the function -->
+      <button mat-icon-button class="validation-submit-button" (click)="onValidateText(validationTextElement)">
+        <mat-icon>double_arrow</mat-icon>
+      </button>
+    </div>
+    <div class="validation-results-section" *ngIf="validationResponse">
+      <div class="validation-result-section">
+        <h1 class="validation-result-title">Validation Results (Based on NLP Expanded)</h1>        
+        <h4>Unsafe words discovered    [along with frequency counts]</h4>
+        <div class="validation-result">
+          <div class="validation-result-word-item" *ngFor="let item of validationResponse.badwordcount | keyvalue">
+            <b>{{item.key}}: {{item.value}}</b>
+          </div>
+        </div>
+        <hr/>
+        <h1 class="validation-result-second-title">Validation Results (Based on ML Model)</h1>        
+        <h4>Flag score: {{validationResponse["safety-score"] | percent }} :   [higher the score, unsafer the content]</h4>
+        <br/><br/><br/>
+        <h5 class="disclaimer-title">DISCLAIMER: Please be advised that this screen may contain harsh language, due to the nature of this application. This application is intended to be used by adults. I do not promote, encourage, or use this kind of language.</h5>        
+      </div>
+      <div class="validation-raw-text-section">
+        <h1 class="validation-raw-text-title">Raw Text</h1>
+        <div class="validation-raw-text">
+          {{ validationResponse.rawtext}}
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="config-page page" *ngIf="isConfigPage">
+    <div class="add-word-section">
+      <h1 class="blacklist-section-title">SET UP UNSAFE WORDS (for NLP Expanded Filtering)</h1>
+      <div>
+        <mat-form-field>
+          <mat-label>Add word to block</mat-label>
+          <input matInput type="text" placeholder="Add word to block" #wordToBlock>
+        </mat-form-field>
+        <button mat-icon-button (click)="onAddBlockWordToLocal(wordToBlock)">
+          <mat-icon>double_arrow</mat-icon>
+        </button>
+      </div>
+      <div class="blacklist-section">
+        <div>
+          <h3></h3>
+
+          <div class="added-words-locally">
+            <div class="word-item" *ngFor="let item of localWordsToBlock">
+              {{item}}
+            </div>
+            <button mat-icon-button class="validation-submit-button" (click)="onAddBlockedWordsToCloud()">
+              <mat-icon>add_circle_outline</mat-icon>
+            </button>
+          </div>
+        </div>  
+        <div>
+          <h3>NLP Expanded List</h3>
+
+          <div class="added-words-cloud">
+            <div class="word-item" *ngFor="let item of cloudWordsToBlock">
+              {{item}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div>
+      <h1 class="whitelist-section-title">SET UP SAFE URLs (for ML Models)</h1>
+      <div class="add-url-section">
+        <mat-form-field class="add-url-input">
+          <mat-label>Add youtube url</mat-label>
+          <input matInput type="text" placeholder="Add youtube urls" #youtubeUrlsAdd>
+        </mat-form-field>
+        <button mat-icon-button (click)="onAddYoutubeUrls(youtubeUrlsAdd)">
+          <mat-icon>double_arrow</mat-icon>
+        </button>
+      </div>
+
+      <div class="whitelist-section">
+        <div>
+          <h3></h3>
+          <div class="add-url-section">
+            <div class="word-item" *ngFor="let item of localYoutubeUrls">
+              {{item}}
+            </div>
+            <button mat-icon-button class="validation-submit-button" (click)="onAddYoutubeUrlsToCloud()">
+              <mat-icon>add_circle_outline</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div>
+          <h3>Submitted URLs</h3>
+          <div class="add-url-section">
+            <div class="word-item" *ngFor="let item of whiteListUrls">
+              {{item}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<router-outlet></router-outlet>
